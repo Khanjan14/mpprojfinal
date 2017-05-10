@@ -1,0 +1,5 @@
+to remove the errors when text to speech modules are used or using player
+
+installed jackd2
+commented out so many lines in alsa.conf file
+removed pulse audio files in alsa conf.d directory
