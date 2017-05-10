@@ -79,26 +79,44 @@ def jarvis(data):
     if "where is" in data:
         data = data.split(" ")
         location = data[2]
-        speak("Hold on Deepika, I will show you where " + location + " is.")
+        speak("Hold on, I will show you where " + location + " is.")
         os.system("chromium-browser https://www.google.nl/maps/place/" + location + "/&amp;")
 
     if ("take a picture" in data) or ("picture" in data):
         speak("Point  your camera")
-        os.system("fswebcam -r 160x120 --no-banner image.jpeg")
+        os.system("raspistill -h 480 -w 360 -o image.jpeg")#("fswebcam -r 160x120 --no-banner image.jpeg")
 
     if ("colour" in data) or ("color" in data) or ("what is my dress colour" in data):
+        speak("Point  your camera")
+        os.system("raspistill -h 480 -w 360 -o color.jpeg")
         speak("Give me a second.. will tell u the color")
-        os.system("python color.py image.jpeg")
+        os.system("python color.py color.jpeg")
     
     if ("pattern" in data) or ("patan" in data)or("Patan" in data)  or ("pattern of dress" in data) or ("titan" in data) or ("cartoon" in data) or ("what is my dress pattern" in data):
+        speak("Point  your camera")
+        os.system("raspistill -h 480 -w 360 -o pattern.jpeg")
         speak("Give me a second.. will tell u the pattern")
-        os.system("python classifier.py -i image_ocr.jpeg")
+        os.system("python classifier.py -i pattern.jpeg")
 
     if ("card" in data) or ("visiting card" in data) or ("business card" in data) or ("Read me the card" in data):
         speak("Point  your camera")
-        os.system("fswebcam -r 1020x720 --no-banner image.jpeg")
+        os.system("raspistill -h 1020 -w 720 -o card.jpeg")#"fswebcam -r 1020x720 --no-banner image.jpeg")
         speak("Give me a second.. will read out the card for you")
-        os.system("python extract.py 1.jpg ")
+        os.system("python extract.py card.jpeg ")
+
+    if("who is it" in data) or("friend" in data):
+        speak("Point  your camera")
+        os.system("raspistill -h 480 -w 360 -o image.jpeg")
+        speak("Give me a second..I will tell you if it is a friend")
+        os.system("python recogn2.py")
+
+    if("how many" in data) or("people" in data):
+        speak("Point  your camera")
+        os.system("raspistill -h 480 -w 360 -o people.jpeg")
+        speak("Give me a second..I will tell you if it is a friend")
+        os.system("python facemul.py")
+
+    
 
     elif "sleep" in data:
         speak("Bye Bye..!")
